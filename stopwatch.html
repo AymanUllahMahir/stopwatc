@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Stopwatch</title>
+</head>
+<body>
+
+<h1 style="text-align: center; color: #3498db; font-family: Arial, sans-serif;">Stopwatch</h1>
+
+<!-- Time display -->
+<div id="timeDisplay" style="font-size: 48px; text-align: center; font-family: 'Courier New', Courier, monospace;">
+    00:00:00
+</div>
+
+<!-- Buttons for start, stop, and reset -->
+<div style="text-align: center; margin-top: 20px;">
+    <button onclick="startTimer()" style="padding: 10px 20px; font-size: 16px; background-color: #2ecc71; border: none; color: white; cursor: pointer; border-radius: 5px;">Start</button>
+    <button onclick="stopTimer()" style="padding: 10px 20px; font-size: 16px; background-color: #e74c3c; border: none; color: white; cursor: pointer; border-radius: 5px;">Stop</button>
+    <button onclick="resetTimer()" style="padding: 10px 20px; font-size: 16px; background-color: #f39c12; border: none; color: white; cursor: pointer; border-radius: 5px;">Reset</button>
+</div>
+
+<script>
+    let seconds = 0;
+    let minutes = 0;
+    let hours = 0;
+    let timer;
+
+    function startTimer() {
+        timer = setInterval(updateTime, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timer);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+        document.getElementById("timeDisplay").textContent = "00:00:00";
+    }
+
+    function updateTime() {
+        seconds++;
+        if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+        }
+        if (minutes === 60) {
+            minutes = 0;
+            hours++;
+        }
+
+        let displayHours = hours < 10 ? "0" + hours : hours;
+        let displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+        let displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.getElementById("timeDisplay").textContent = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+    }
+</script>
+
+</body>
+</html>
